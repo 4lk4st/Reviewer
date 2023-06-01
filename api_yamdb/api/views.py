@@ -31,10 +31,9 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (AllowAny,)
 
-    def create(self, request, *args, **kwargs):
-        username = request.data.get('username')
+    def name_email_validation(self, request):
         email = request.data.get('email')
-        create_roles_and_permissions()
+        username = request.data.get('username')
         errors = {}
         if not email:
             errors['email'] = ['Поле email обязательно для заполнения.']
@@ -48,9 +47,15 @@ class UserViewSet(viewsets.ModelViewSet):
                 code=status.HTTP_400_BAD_REQUEST)
         if len(username) > 150:
             raise ValidationError(
-                {'email': 'Поле username не должно быть длинее 254 символов.'},
+                {'username': 'Поле username не должно быть'
+                 'длинее 150 символов.'},
                 code=status.HTTP_400_BAD_REQUEST)
-        # проверяем, что пользователь переал верные username и email
+
+    def create(self, request, *args, **kwargs):
+        username = request.data.get('username')
+        email = request.data.get('email')
+        create_roles_and_permissions()
+        self.name_email_validation(request=self.request)
         if (
             User.objects.filter(email=email).exists()
             and User.objects.get(email=email).username != username

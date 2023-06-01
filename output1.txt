@@ -1,0 +1,1231 @@
+============================= test session starts =============================
+platform win32 -- Python 3.9.0, pytest-6.2.4, py-1.11.0, pluggy-0.13.1 -- c:\dev\api_yamdb\venv\scripts\python.exe
+django: settings: api_yamdb.settings (from ini)
+rootdir: C:\Dev\api_yamdb, configfile: pytest.ini, testpaths: tests/
+plugins: django-4.4.0, pythonpath-0.7.3
+collecting ... collected 77 items
+
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_nodata_signup PASSED [  1%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_invalid_data_signup PASSED [  2%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_singup_length_and_simbols_validation[data0-messege0] PASSED [  3%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_singup_length_and_simbols_validation[data1-messege1] PASSED [  5%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_singup_length_and_simbols_validation[data2-messege2] PASSED [  6%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_valid_data_user_signup PASSED [  7%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_valid_data_admin_create_user PASSED [  9%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_admin_create_user_length_and_simbols_validation[data0-messege0] PASSED [ 10%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_admin_create_user_length_and_simbols_validation[data1-messege1] PASSED [ 11%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_admin_create_user_length_and_simbols_validation[data2-messege2] PASSED [ 12%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_admin_create_user_length_and_simbols_validation[data3-messege3] PASSED [ 14%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_admin_create_user_length_and_simbols_validation[data4-messege4] PASSED [ 15%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_obtain_jwt_token_invalid_data PASSED [ 16%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_registration_me_username_restricted PASSED [ 18%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_00_registration_same_email_restricted PASSED [ 19%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_get_new_confirmation_code_for_existing_user PASSED [ 20%]
+tests/test_00_user_registration.py::Test00UserRegistration::test_get_confirmation_code_for_user_created_by_admin PASSED [ 22%]
+tests/test_01_users.py::Test01UserAPI::test_01_users_not_authenticated PASSED [ 23%]
+tests/test_01_users.py::Test01UserAPI::test_02_users_username_not_authenticated PASSED [ 24%]
+tests/test_01_users.py::Test01UserAPI::test_03_users_me_not_authenticated PASSED [ 25%]
+tests/test_01_users.py::Test01UserAPI::test_04_users_get_admin PASSED    [ 27%]
+tests/test_01_users.py::Test01UserAPI::test_04_02_users_get_search PASSED [ 28%]
+tests/test_01_users.py::Test01UserAPI::test_04_01_users_get_admin_only PASSED [ 29%]
+tests/test_01_users.py::Test01UserAPI::test_05_01_users_post_admin_bad_requests PASSED [ 31%]
+tests/test_01_users.py::Test01UserAPI::test_05_02_users_post_admin_user_creation[data0-] PASSED [ 32%]
+tests/test_01_users.py::Test01UserAPI::test_05_02_users_post_admin_user_creation[data1-без указания роли нового пользователя ] PASSED [ 33%]
+tests/test_01_users.py::Test01UserAPI::test_05_03_users_post_response_has_data PASSED [ 35%]
+tests/test_01_users.py::Test01UserAPI::test_05_04_users_post_user_superuser PASSED [ 36%]
+tests/test_01_users.py::Test01UserAPI::test_06_users_username_get_admin PASSED [ 37%]
+tests/test_01_users.py::Test01UserAPI::test_06_users_username_get_not_admin PASSED [ 38%]
+tests/test_01_users.py::Test01UserAPI::test_07_01_users_username_patch_admin PASSED [ 40%]
+tests/test_01_users.py::Test01UserAPI::test_07_02_users_username_patch_moderator PASSED [ 41%]
+tests/test_01_users.py::Test01UserAPI::test_07_03_users_username_patch_user PASSED [ 42%]
+tests/test_01_users.py::Test01UserAPI::test_07_05_users_username_put_not_allowed PASSED [ 44%]
+tests/test_01_users.py::Test01UserAPI::test_08_01_users_username_delete_admin PASSED [ 45%]
+tests/test_01_users.py::Test01UserAPI::test_08_02_users_username_delete_moderator PASSED [ 46%]
+tests/test_01_users.py::Test01UserAPI::test_08_03_users_username_delete_user PASSED [ 48%]
+tests/test_01_users.py::Test01UserAPI::test_08_04_users_username_delete_superuser PASSED [ 49%]
+tests/test_01_users.py::Test01UserAPI::test_09_users_me_get PASSED       [ 50%]
+tests/test_01_users.py::Test01UserAPI::test_09_02_users_me_delete_not_allowed PASSED [ 51%]
+tests/test_01_users.py::Test01UserAPI::test_10_01_users_me_patch PASSED  [ 53%]
+tests/test_01_users.py::Test01UserAPI::test_10_02_users_me_has_field_validation[data0-messege0] PASSED [ 54%]
+tests/test_01_users.py::Test01UserAPI::test_10_02_users_me_has_field_validation[data1-messege1] PASSED [ 55%]
+tests/test_01_users.py::Test01UserAPI::test_10_02_users_me_has_field_validation[data2-messege2] PASSED [ 57%]
+tests/test_01_users.py::Test01UserAPI::test_10_02_users_me_has_field_validation[data3-messege3] PASSED [ 58%]
+tests/test_01_users.py::Test01UserAPI::test_10_02_users_me_has_field_validation[data4-messege4] PASSED [ 59%]
+tests/test_01_users.py::Test01UserAPI::test_10_03_users_me_patch_change_role_not_allowed PASSED [ 61%]
+tests/test_02_category.py::Test02CategoryAPI::test_01_category_not_auth PASSED [ 62%]
+tests/test_02_category.py::Test02CategoryAPI::test_02_category_with_admin_user FAILED [ 63%]
+tests/test_02_category.py::Test02CategoryAPI::test_03_category_fields_validation[data0-massage0] PASSED [ 64%]
+tests/test_02_category.py::Test02CategoryAPI::test_03_category_fields_validation[data1-massage1] PASSED [ 66%]
+tests/test_02_category.py::Test02CategoryAPI::test_03_category_fields_validation[data2-massage2] PASSED [ 67%]
+tests/test_02_category.py::Test02CategoryAPI::test_04_category_delete_admin FAILED [ 68%]
+tests/test_02_category.py::Test02CategoryAPI::test_05_category_check_permission_admin FAILED [ 70%]
+tests/test_03_genre.py::Test03GenreAPI::test_01_genre_not_auth PASSED    [ 71%]
+tests/test_03_genre.py::Test03GenreAPI::test_02_genre FAILED             [ 72%]
+tests/test_03_genre.py::Test03GenreAPI::test_03_category_fields_validation[data0-massage0] PASSED [ 74%]
+tests/test_03_genre.py::Test03GenreAPI::test_03_category_fields_validation[data1-massage1] PASSED [ 75%]
+tests/test_03_genre.py::Test03GenreAPI::test_03_category_fields_validation[data2-massage2] PASSED [ 76%]
+tests/test_03_genre.py::Test03GenreAPI::test_04_genres_delete FAILED     [ 77%]
+tests/test_03_genre.py::Test03GenreAPI::test_05_genres_check_permission FAILED [ 79%]
+tests/test_04_title.py::Test04TitleAPI::test_01_title_not_auth PASSED    [ 80%]
+tests/test_04_title.py::Test04TitleAPI::test_02_title_admin FAILED       [ 81%]
+tests/test_04_title.py::Test04TitleAPI::test_03_titles_detail FAILED     [ 83%]
+tests/test_04_title.py::Test04TitleAPI::test_04_titles_name_length_validation FAILED [ 84%]
+tests/test_04_title.py::Test04TitleAPI::test_05_titles_check_permission FAILED [ 85%]
+tests/test_05_review.py::Test05ReviewAPI::test_01_review_not_auth FAILED [ 87%]
+tests/test_05_review.py::Test05ReviewAPI::test_02_review_post FAILED     [ 88%]
+tests/test_05_review.py::Test05ReviewAPI::test_03_review_detail_get FAILED [ 89%]
+tests/test_05_review.py::Test05ReviewAPI::test_04_review_detail_user FAILED [ 90%]
+tests/test_05_review.py::Test05ReviewAPI::test_05_reviews_detail_moderator_and_admin FAILED [ 92%]
+tests/test_06_comment.py::Test06CommentAPI::test_01_comment_not_auth FAILED [ 93%]
+tests/test_06_comment.py::Test06CommentAPI::test_02_comment FAILED       [ 94%]
+tests/test_06_comment.py::Test06CommentAPI::test_03_comment_detail_get FAILED [ 96%]
+tests/test_06_comment.py::Test06CommentAPI::test_04_comment_detail__user_patch_delete FAILED [ 97%]
+tests/test_06_comment.py::Test06CommentAPI::test_05_comment_detail_admin_and_moderator FAILED [ 98%]
+tests/test_06_comment.py::Test06CommentAPI::test_06_comment_detail_not_auth FAILED [100%]
+
+================================== FAILURES ===================================
+_____________ Test02CategoryAPI.test_02_category_with_admin_user ______________
+
+self = <tests.test_02_category.Test02CategoryAPI object at 0x000000000677AF70>
+admin_client = <rest_framework.test.APIClient object at 0x00000000067121F0>
+
+    def test_02_category_with_admin_user(self, admin_client):
+        categories_count = 0
+    
+        url = '/api/v1/categories/'
+        data = {}
+        response = admin_client.post(url, data=data)
+        assert response.status_code == HTTPStatus.BAD_REQUEST, (
+            f'Если POST-запрос администратора, отправленный к `{url}`, '
+            'содержит некорректные данные - должен вернуться ответ со '
+            'статусом 400.'
+        )
+    
+        data = {
+            'name': 'Фильм',
+            'slug': 'films'
+        }
+        response = admin_client.post(url, data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            f'Если POST-запрос администратора, отправленный к `{url}`, '
+            'содержит корректные данные - должен вернуться ответ со статусом '
+            '201.'
+        )
+        categories_count += 1
+    
+        data = {
+            'name': 'Новые фильмы',
+            'slug': 'films'
+        }
+        response = admin_client.post(url, data=data)
+        assert response.status_code == HTTPStatus.BAD_REQUEST, (
+            f'Если в POST-запросе администратора к `{url}` '
+            'передан уже существующий `slug` - должен вернуться ответ со '
+            'статусом 400.'
+        )
+    
+        post_data = {
+            'name': 'Книги',
+            'slug': 'books'
+        }
+        response = admin_client.post(url, data=post_data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            f'Если POST-запрос администратора к `{url}` '
+            'содержит корректные данные - должен вернуться ответ со статусом '
+            '201.'
+        )
+        categories_count += 1
+    
+        response = admin_client.get(url)
+        assert response.status_code == HTTPStatus.OK, (
+            f'Проверьте, что при GET-запросе к `{url}` возвращается статус '
+            '200.'
+        )
+        data = response.json()
+        check_pagination(url, data, categories_count, post_data)
+    
+        response = admin_client.get(f'{url}?search={post_data["name"]}')
+        data = response.json()
+>       assert len(data['results']) == 1, (
+            f'Проверьте, что GET-запрос к `{url}?search=<name>` возвращает '
+            'данные только тех категорий, поле `name` которых удовлетворяет '
+            'условию поиска.'
+        )
+E       AssertionError: Проверьте, что GET-запрос к `/api/v1/categories/?search=<name>` возвращает данные только тех категорий, поле `name` которых удовлетворяет условию поиска.
+E       assert 2 == 1
+E         +2
+E         -1
+
+tests\test_02_category.py:80: AssertionError
+------------------------------ Captured log call ------------------------------
+WARNING  django.request:log.py:224 Bad Request: /api/v1/categories/
+WARNING  django.request:log.py:224 Bad Request: /api/v1/categories/
+_______________ Test02CategoryAPI.test_04_category_delete_admin _______________
+
+self = <tests.test_02_category.Test02CategoryAPI object at 0x00000000066FA940>
+admin_client = <rest_framework.test.APIClient object at 0x0000000006B8B0A0>
+
+    def test_04_category_delete_admin(self, admin_client):
+        category_1, category_2 = create_categories(admin_client)
+        response = admin_client.delete(
+            f'/api/v1/categories/{category_1["slug"]}/'
+        )
+>       assert response.status_code == HTTPStatus.NO_CONTENT, (
+            'Проверьте, что DELETE-запрос администратора к '
+            '`/api/v1/categories/{slug}/` возвращает ответ со статусом 204.'
+        )
+E       AssertionError: Проверьте, что DELETE-запрос администратора к `/api/v1/categories/{slug}/` возвращает ответ со статусом 204.
+E       assert 404 == <HTTPStatus.NO_CONTENT: 204>
+E         +404
+E         -<HTTPStatus.NO_CONTENT: 204>
+
+tests\test_02_category.py:99: AssertionError
+------------------------------ Captured log call ------------------------------
+WARNING  django.request:log.py:224 Not Found: /api/v1/categories/films/
+__________ Test02CategoryAPI.test_05_category_check_permission_admin __________
+
+self = <tests.test_02_category.Test02CategoryAPI object at 0x00000000066FA9D0>
+client = <django.test.client.Client object at 0x0000000006C19220>
+user_client = <rest_framework.test.APIClient object at 0x0000000006C19070>
+moderator_client = <rest_framework.test.APIClient object at 0x0000000006698580>
+admin_client = <rest_framework.test.APIClient object at 0x0000000006B9F700>
+
+    def test_05_category_check_permission_admin(self, client,
+                                                user_client,
+                                                moderator_client,
+                                                admin_client):
+        categories = create_categories(admin_client)
+        data = {
+            'name': 'Музыка',
+            'slug': 'music'
+        }
+        url = '/api/v1/categories/'
+>       check_permissions(client, url, data, 'неавторизованного пользователя',
+                          categories, HTTPStatus.UNAUTHORIZED)
+
+tests\test_02_category.py:135: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\utils.py:135: in check_permissions
+    response = client.post(url, data=data)
+venv\lib\site-packages\django\test\client.py:751: in post
+    response = super().post(path, data=data, content_type=content_type, secure=secure, **extra)
+venv\lib\site-packages\django\test\client.py:407: in post
+    return self.generic('POST', path, post_data, content_type,
+venv\lib\site-packages\django\test\client.py:473: in generic
+    return self.request(**r)
+venv\lib\site-packages\django\test\client.py:719: in request
+    self.check_exception(response)
+venv\lib\site-packages\django\test\client.py:580: in check_exception
+    raise exc_value
+venv\lib\site-packages\django\core\handlers\exception.py:47: in inner
+    response = get_response(request)
+venv\lib\site-packages\django\core\handlers\base.py:181: in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+venv\lib\site-packages\django\views\decorators\csrf.py:54: in wrapped_view
+    return view_func(*args, **kwargs)
+venv\lib\site-packages\rest_framework\viewsets.py:125: in view
+    return self.dispatch(request, *args, **kwargs)
+venv\lib\site-packages\rest_framework\views.py:509: in dispatch
+    response = self.handle_exception(exc)
+venv\lib\site-packages\rest_framework\views.py:469: in handle_exception
+    self.raise_uncaught_exception(exc)
+venv\lib\site-packages\rest_framework\views.py:480: in raise_uncaught_exception
+    raise exc
+venv\lib\site-packages\rest_framework\views.py:497: in dispatch
+    self.initial(request, *args, **kwargs)
+venv\lib\site-packages\rest_framework\views.py:415: in initial
+    self.check_permissions(request)
+venv\lib\site-packages\rest_framework\views.py:332: in check_permissions
+    if not permission.has_permission(request, self):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <api.permissions.IsAdminOrReadOnly object at 0x0000000006691FD0>
+request = <rest_framework.request.Request: POST '/api/v1/categories/'>
+view = <api.views.CategoryViewSet object at 0x00000000066912E0>
+
+    def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        else:
+>           return request.user.role == 'admin'
+E           AttributeError: 'AnonymousUser' object has no attribute 'role'
+
+api_yamdb\api\permissions.py:23: AttributeError
+------------------------------ Captured log call ------------------------------
+ERROR    django.request:log.py:224 Internal Server Error: /api/v1/categories/
+Traceback (most recent call last):
+  File "c:\dev\api_yamdb\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\views.py", line 415, in initial
+    self.check_permissions(request)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\views.py", line 332, in check_permissions
+    if not permission.has_permission(request, self):
+  File "C:\Dev\api_yamdb\api_yamdb\api\permissions.py", line 23, in has_permission
+    return request.user.role == 'admin'
+AttributeError: 'AnonymousUser' object has no attribute 'role'
+________________________ Test03GenreAPI.test_02_genre _________________________
+
+self = <tests.test_03_genre.Test03GenreAPI object at 0x0000000006B98C10>
+admin_client = <rest_framework.test.APIClient object at 0x0000000005E00A00>
+client = <django.test.client.Client object at 0x0000000005E00AF0>
+
+    def test_02_genre(self, admin_client, client):
+        genres_count = 0
+        url = '/api/v1/genres/'
+    
+        data = {}
+        response = admin_client.post(url, data=data)
+        assert response.status_code == HTTPStatus.BAD_REQUEST, (
+            f'Если POST-запрос администратора к `{url}` '
+            'содержит некорректные данные - должен вернуться ответ со '
+            'статусом 400.'
+        )
+    
+        data = {'name': 'Ужасы', 'slug': 'horror'}
+        response = admin_client.post(url, data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            f'Если POST-запрос администратора к `{url}` содержит корректные '
+            'данные - должен вернуться ответ со статусом 201.'
+        )
+        genres_count += 1
+    
+        data = {'name': 'Триллер', 'slug': 'horror'}
+        response = admin_client.post(url, data=data)
+        assert response.status_code == HTTPStatus.BAD_REQUEST, (
+            f'Если в POST-запросе администратора, отправленном к `{url}`, '
+            'передан уже существующий `slug` - должен вернуться ответ со '
+            'статусом 400.'
+        )
+    
+        post_data = {'name': 'Комедия', 'slug': 'comedy'}
+        response = admin_client.post(url, data=post_data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            f'Если POST-запрос администратора, отправленный к `{url}`, '
+            'содержит корректные данные - должен вернуться ответ со статусом '
+            '201.'
+        )
+        genres_count += 1
+    
+        response = client.get(url)
+        assert response.status_code == HTTPStatus.OK, (
+            'Проверьте, что GET-запрос неавторизованного пользователя к '
+            f'`{url}` возвращает ответ со статусом 200.'
+        )
+        data = response.json()
+        check_pagination(url, data, genres_count, post_data)
+    
+        response = admin_client.get(f'{url}?search={post_data["name"]}')
+        data = response.json()
+>       assert len(data['results']) == 1, (
+            f'Проверьте, что GET-запрос к `{url}?search=<name>` возвращает '
+            'данные только тех жанров, поле `name` которых удовлетворяет '
+            'условию поиска.'
+        )
+E       AssertionError: Проверьте, что GET-запрос к `/api/v1/genres/?search=<name>` возвращает данные только тех жанров, поле `name` которых удовлетворяет условию поиска.
+E       assert 2 == 1
+E         +2
+E         -1
+
+tests\test_03_genre.py:70: AssertionError
+------------------------------ Captured log call ------------------------------
+WARNING  django.request:log.py:224 Bad Request: /api/v1/genres/
+WARNING  django.request:log.py:224 Bad Request: /api/v1/genres/
+____________________ Test03GenreAPI.test_04_genres_delete _____________________
+
+self = <tests.test_03_genre.Test03GenreAPI object at 0x0000000006156400>
+admin_client = <rest_framework.test.APIClient object at 0x000000000616D700>
+
+    def test_04_genres_delete(self, admin_client):
+        genres = create_genre(admin_client)
+        response = admin_client.delete(f'/api/v1/genres/{genres[0]["slug"]}/')
+>       assert response.status_code == HTTPStatus.NO_CONTENT, (
+            'Проверьте, что DELETE-запрос администратора к '
+            '`/api/v1/genres/{slug}/` возвращает ответ со  статусом 204.'
+        )
+E       AssertionError: Проверьте, что DELETE-запрос администратора к `/api/v1/genres/{slug}/` возвращает ответ со  статусом 204.
+E       assert 404 == <HTTPStatus.NO_CONTENT: 204>
+E         +404
+E         -<HTTPStatus.NO_CONTENT: 204>
+
+tests\test_03_genre.py:87: AssertionError
+------------------------------ Captured log call ------------------------------
+WARNING  django.request:log.py:224 Not Found: /api/v1/genres/horror/
+_______________ Test03GenreAPI.test_05_genres_check_permission ________________
+
+self = <tests.test_03_genre.Test03GenreAPI object at 0x00000000066F4490>
+client = <django.test.client.Client object at 0x00000000065F31F0>
+user_client = <rest_framework.test.APIClient object at 0x000000000668B250>
+moderator_client = <rest_framework.test.APIClient object at 0x000000000613E2E0>
+admin_client = <rest_framework.test.APIClient object at 0x000000000664BE20>
+
+    def test_05_genres_check_permission(self, client,
+                                        user_client,
+                                        moderator_client,
+                                        admin_client):
+        genres = create_genre(admin_client)
+        data = {
+            'name': 'Боевик',
+            'slug': 'action'
+        }
+        url = '/api/v1/genres/'
+>       check_permissions(client, url, data, 'неавторизованного пользователя',
+                          genres, HTTPStatus.UNAUTHORIZED)
+
+tests\test_03_genre.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\utils.py:135: in check_permissions
+    response = client.post(url, data=data)
+venv\lib\site-packages\django\test\client.py:751: in post
+    response = super().post(path, data=data, content_type=content_type, secure=secure, **extra)
+venv\lib\site-packages\django\test\client.py:407: in post
+    return self.generic('POST', path, post_data, content_type,
+venv\lib\site-packages\django\test\client.py:473: in generic
+    return self.request(**r)
+venv\lib\site-packages\django\test\client.py:719: in request
+    self.check_exception(response)
+venv\lib\site-packages\django\test\client.py:580: in check_exception
+    raise exc_value
+venv\lib\site-packages\django\core\handlers\exception.py:47: in inner
+    response = get_response(request)
+venv\lib\site-packages\django\core\handlers\base.py:181: in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+venv\lib\site-packages\django\views\decorators\csrf.py:54: in wrapped_view
+    return view_func(*args, **kwargs)
+venv\lib\site-packages\rest_framework\viewsets.py:125: in view
+    return self.dispatch(request, *args, **kwargs)
+venv\lib\site-packages\rest_framework\views.py:509: in dispatch
+    response = self.handle_exception(exc)
+venv\lib\site-packages\rest_framework\views.py:469: in handle_exception
+    self.raise_uncaught_exception(exc)
+venv\lib\site-packages\rest_framework\views.py:480: in raise_uncaught_exception
+    raise exc
+venv\lib\site-packages\rest_framework\views.py:497: in dispatch
+    self.initial(request, *args, **kwargs)
+venv\lib\site-packages\rest_framework\views.py:415: in initial
+    self.check_permissions(request)
+venv\lib\site-packages\rest_framework\views.py:332: in check_permissions
+    if not permission.has_permission(request, self):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <api.permissions.IsAdminOrReadOnly object at 0x00000000066EBEE0>
+request = <rest_framework.request.Request: POST '/api/v1/genres/'>
+view = <api.views.GenreViewSet object at 0x00000000066EB370>
+
+    def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        else:
+>           return request.user.role == 'admin'
+E           AttributeError: 'AnonymousUser' object has no attribute 'role'
+
+api_yamdb\api\permissions.py:23: AttributeError
+------------------------------ Captured log call ------------------------------
+ERROR    django.request:log.py:224 Internal Server Error: /api/v1/genres/
+Traceback (most recent call last):
+  File "c:\dev\api_yamdb\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\views.py", line 415, in initial
+    self.check_permissions(request)
+  File "c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\views.py", line 332, in check_permissions
+    if not permission.has_permission(request, self):
+  File "C:\Dev\api_yamdb\api_yamdb\api\permissions.py", line 23, in has_permission
+    return request.user.role == 'admin'
+AttributeError: 'AnonymousUser' object has no attribute 'role'
+_____________________ Test04TitleAPI.test_02_title_admin ______________________
+
+self = <tests.test_04_title.Test04TitleAPI object at 0x0000000005EBEA00>
+admin_client = <rest_framework.test.APIClient object at 0x0000000006D98190>
+client = <django.test.client.Client object at 0x0000000006D98490>
+
+    def test_02_title_admin(self, admin_client, client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        url = '/api/v1/titles/'
+        title_count = 0
+    
+        assert_msg = (
+            f'Если POST-запрос администратора к `{url}` '
+            'содержит некорректные данные - должен вернуться ответ со '
+            'статусом 400.'
+        )
+        data = {}
+        response = admin_client.post(url, data=data)
+        assert response.status_code == HTTPStatus.BAD_REQUEST, assert_msg
+    
+        invalid_data = {
+            'name': 'Угнать за 60 секунд',
+            'year': 'дветыщи',
+            'genre': [genres[1]['slug']],
+            'category': categories[1]['slug'],
+            'description': 'Угонял машины всю ночь и немного подустал.'
+        }
+        response = admin_client.post(url, data=invalid_data)
+        assert response.status_code == HTTPStatus.BAD_REQUEST, assert_msg
+    
+        post_data_1 = {
+            'name': 'Мост через реку Квай',
+            'year': 1957,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'Рон Свонсон рекомендует.'
+        }
+        response = admin_client.post(url, data=post_data_1)
+        assert response.status_code == HTTPStatus.CREATED, (
+            f'Если POST-запрос администратора к `{url}` '
+            'содержит корректные данные - должен вернуться ответ со статусом '
+            '201.'
+        )
+        title_count += 1
+    
+        post_data_2 = {
+            'name': 'Хороший, плохой, злой.',
+            'year': 1966,
+            'genre': [genres[2]['slug']],
+            'category': categories[1]['slug'],
+            'description': 'Угадай ревьюера по названию фильма.'
+        }
+        response = admin_client.post(url, data=post_data_2)
+        assert response.status_code == HTTPStatus.CREATED, (
+            f'Если POST-запрос администратора к `{url}` '
+            'содержит корректные данные - должен вернуться ответ со статусом '
+            '201.'
+        )
+        title_count += 1
+>       assert isinstance(response.json().get('id'), int), (
+            f'Проверьте, при POST-запросе администратора к `{url}` '
+            'в ответе возвращаются данные созданного объекта. Сейчас поле '
+            '`id` отсутствует или не является целым числом.'
+        )
+E       AssertionError: Проверьте, при POST-запросе администратора к `/api/v1/titles/` в ответе возвращаются данные созданного объекта. Сейчас поле `id` отсутствует или не является целым числом.
+E       assert False
+E        +  where False = isinstance(None, int)
+E        +    where None = <built-in method get of dict object at 0x0000000005EACE00>('id')
+E        +      where <built-in method get of dict object at 0x0000000005EACE00> = {'category': 'books', 'description': 'Угадай ревьюера по названию фильма.', 'genre': ['drama'], 'name': 'Хороший, плохой, злой.', ...}.get
+E        +        where {'category': 'books', 'description': 'Угадай ревьюера по названию фильма.', 'genre': ['drama'], 'name': 'Хороший, плохой, злой.', ...} = functools.partial(<bound method ClientMixin._parse_json of <rest_framework.test.APIClient object at 0x0000000006D98190>>, <Response status_code=201, "application/json">)()
+E        +          where functools.partial(<bound method ClientMixin._parse_json of <rest_framework.test.APIClient object at 0x0000000006D98190>>, <Response status_code=201, "application/json">) = <Response status_code=201, "application/json">.json
+
+tests\test_04_title.py:77: AssertionError
+------------------------------ Captured log call ------------------------------
+WARNING  django.request:log.py:224 Bad Request: /api/v1/titles/
+WARNING  django.request:log.py:224 Bad Request: /api/v1/titles/
+____________________ Test04TitleAPI.test_03_titles_detail _____________________
+
+self = <tests.test_04_title.Test04TitleAPI object at 0x0000000006D98970>
+client = <django.test.client.Client object at 0x00000000061845E0>
+admin_client = <rest_framework.test.APIClient object at 0x0000000006628C40>
+
+    def test_03_titles_detail(self, client, admin_client):
+>       titles, categories, genres = create_titles(admin_client)
+
+tests\test_04_title.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+admin_client = <rest_framework.test.APIClient object at 0x0000000006628C40>
+
+    def create_titles(admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        result = []
+        data = {
+            'name': 'Терминатор',
+            'year': 1984,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'I`ll be back'
+        }
+        response = admin_client.post('/api/v1/titles/', data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            'Если POST-запрос администратора к `/api/v1/titles/` содержит '
+            'корректные данные - должен вернуться ответ со статусом 201.'
+        )
+>       data['id'] = response.json()['id']
+E       KeyError: 'id'
+
+tests\utils.py:231: KeyError
+____________ Test04TitleAPI.test_04_titles_name_length_validation _____________
+
+self = <tests.test_04_title.Test04TitleAPI object at 0x0000000007E8BFD0>
+admin_client = <rest_framework.test.APIClient object at 0x0000000006617910>
+
+    def test_04_titles_name_length_validation(self, admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        url = '/api/v1/titles/'
+    
+        data = {
+            'name': 'It`s Over 9000!' + '!' * 242,
+            'year': 1989,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'Dragon Ball Z'
+        }
+        response = admin_client.post(url, data=data)
+        assert response.status_code == HTTPStatus.BAD_REQUEST, (
+            'Убедитесь, что при обработке POST-запроса администратора к '
+            f'`{url}` проверяется длина поля `name`: название произведения '
+            'не может быть длиннее 256 символов.'
+        )
+    
+        data = {
+            'name': 'Мост через реку Квай',
+            'year': 1957,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'Рон Свонсон рекомендует.'
+        }
+        response = admin_client.post(url, data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            f'Если POST-запрос администратора к `{url}` '
+            'содержит корректные данные - должен вернуться ответ со статусом '
+            '201.'
+        )
+        idx = response.json().get('id')
+>       assert idx, (
+            f'Проверьте, что ответ на успешный POST-запрос к `{url}` '
+            'содержит `id` созданного произведения.'
+        )
+E       AssertionError: Проверьте, что ответ на успешный POST-запрос к `/api/v1/titles/` содержит `id` созданного произведения.
+E       assert None
+
+tests\test_04_title.py:286: AssertionError
+------------------------------ Captured log call ------------------------------
+WARNING  django.request:log.py:224 Bad Request: /api/v1/titles/
+_______________ Test04TitleAPI.test_05_titles_check_permission ________________
+
+self = <tests.test_04_title.Test04TitleAPI object at 0x0000000006B8BC70>
+client = <django.test.client.Client object at 0x0000000005F90670>
+user_client = <rest_framework.test.APIClient object at 0x0000000005F90F70>
+moderator_client = <rest_framework.test.APIClient object at 0x0000000006C58B80>
+admin_client = <rest_framework.test.APIClient object at 0x0000000006DAD760>
+
+    def test_05_titles_check_permission(self, client, user_client,
+                                        moderator_client, admin_client):
+>       titles, categories, genres = create_titles(admin_client)
+
+tests\test_04_title.py:302: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+admin_client = <rest_framework.test.APIClient object at 0x0000000006DAD760>
+
+    def create_titles(admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        result = []
+        data = {
+            'name': 'Терминатор',
+            'year': 1984,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'I`ll be back'
+        }
+        response = admin_client.post('/api/v1/titles/', data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            'Если POST-запрос администратора к `/api/v1/titles/` содержит '
+            'корректные данные - должен вернуться ответ со статусом 201.'
+        )
+>       data['id'] = response.json()['id']
+E       KeyError: 'id'
+
+tests\utils.py:231: KeyError
+___________________ Test05ReviewAPI.test_01_review_not_auth ___________________
+
+self = <tests.test_05_review.Test05ReviewAPI object at 0x0000000005F90A90>
+client = <django.test.client.Client object at 0x0000000006C19910>
+admin_client = <rest_framework.test.APIClient object at 0x00000000057385E0>
+admin = <User: TestAdmin>
+user_client = <rest_framework.test.APIClient object at 0x000000000672B580>
+user = <User: TestUser>
+moderator_client = <rest_framework.test.APIClient object at 0x0000000005F69DC0>
+moderator = <User: TestModerator>
+
+    def test_01_review_not_auth(self, client, admin_client, admin, user_client,
+                                user, moderator_client, moderator):
+        author_map = {
+            admin: admin_client,
+            user: user_client,
+            moderator: moderator_client
+        }
+>       reviews, titles = create_reviews(admin_client, author_map)
+
+tests\test_05_review.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\utils.py:247: in create_reviews
+    titles, _, _ = create_titles(admin_client)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+admin_client = <rest_framework.test.APIClient object at 0x00000000057385E0>
+
+    def create_titles(admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        result = []
+        data = {
+            'name': 'Терминатор',
+            'year': 1984,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'I`ll be back'
+        }
+        response = admin_client.post('/api/v1/titles/', data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            'Если POST-запрос администратора к `/api/v1/titles/` содержит '
+            'корректные данные - должен вернуться ответ со статусом 201.'
+        )
+>       data['id'] = response.json()['id']
+E       KeyError: 'id'
+
+tests\utils.py:231: KeyError
+_____________________ Test05ReviewAPI.test_02_review_post _____________________
+
+self = <tests.test_05_review.Test05ReviewAPI object at 0x0000000007E30F10>
+admin_client = <rest_framework.test.APIClient object at 0x000000000667B370>
+user_client = <rest_framework.test.APIClient object at 0x0000000005F95850>
+moderator_client = <rest_framework.test.APIClient object at 0x0000000006178160>
+admin = <User: TestAdmin>
+
+    def test_02_review_post(self, admin_client, user_client,
+                            moderator_client, admin):
+>       titles, _, _ = create_titles(admin_client)
+
+tests\test_05_review.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+admin_client = <rest_framework.test.APIClient object at 0x000000000667B370>
+
+    def create_titles(admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        result = []
+        data = {
+            'name': 'Терминатор',
+            'year': 1984,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'I`ll be back'
+        }
+        response = admin_client.post('/api/v1/titles/', data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            'Если POST-запрос администратора к `/api/v1/titles/` содержит '
+            'корректные данные - должен вернуться ответ со статусом 201.'
+        )
+>       data['id'] = response.json()['id']
+E       KeyError: 'id'
+
+tests\utils.py:231: KeyError
+__________________ Test05ReviewAPI.test_03_review_detail_get __________________
+
+self = <tests.test_05_review.Test05ReviewAPI object at 0x000000000667BE20>
+client = <django.test.client.Client object at 0x0000000005F76400>
+admin_client = <rest_framework.test.APIClient object at 0x0000000005F76B80>
+admin = <User: TestAdmin>, user = <User: TestUser>
+user_client = <rest_framework.test.APIClient object at 0x0000000005F712E0>
+moderator = <User: TestModerator>
+moderator_client = <rest_framework.test.APIClient object at 0x0000000005F17550>
+
+    def test_03_review_detail_get(self, client, admin_client, admin, user,
+                                  user_client, moderator, moderator_client):
+        author_map = {
+            admin: admin_client,
+            user: user_client,
+            moderator: moderator_client
+        }
+>       reviews, titles = create_reviews(admin_client, author_map)
+
+tests\test_05_review.py:227: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\utils.py:247: in create_reviews
+    titles, _, _ = create_titles(admin_client)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+admin_client = <rest_framework.test.APIClient object at 0x0000000005F76B80>
+
+    def create_titles(admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        result = []
+        data = {
+            'name': 'Терминатор',
+            'year': 1984,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'I`ll be back'
+        }
+        response = admin_client.post('/api/v1/titles/', data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            'Если POST-запрос администратора к `/api/v1/titles/` содержит '
+            'корректные данные - должен вернуться ответ со статусом 201.'
+        )
+>       data['id'] = response.json()['id']
+E       KeyError: 'id'
+
+tests\utils.py:231: KeyError
+_________________ Test05ReviewAPI.test_04_review_detail_user __________________
+
+self = <tests.test_05_review.Test05ReviewAPI object at 0x0000000005F765E0>
+admin_client = <rest_framework.test.APIClient object at 0x00000000066FA640>
+admin = <User: TestAdmin>, user = <User: TestUser>
+user_client = <rest_framework.test.APIClient object at 0x0000000006BA48E0>
+moderator = <User: TestModerator>
+moderator_client = <rest_framework.test.APIClient object at 0x0000000005ED3FD0>
+
+    def test_04_review_detail_user(self, admin_client, admin, user,
+                                   user_client, moderator, moderator_client):
+        author_map = {
+            admin: admin_client,
+            user: user_client,
+            moderator: moderator_client
+        }
+>       reviews, titles = create_reviews(admin_client, author_map)
+
+tests\test_05_review.py:257: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\utils.py:247: in create_reviews
+    titles, _, _ = create_titles(admin_client)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+admin_client = <rest_framework.test.APIClient object at 0x00000000066FA640>
+
+    def create_titles(admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        result = []
+        data = {
+            'name': 'Терминатор',
+            'year': 1984,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'I`ll be back'
+        }
+        response = admin_client.post('/api/v1/titles/', data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            'Если POST-запрос администратора к `/api/v1/titles/` содержит '
+            'корректные данные - должен вернуться ответ со статусом 201.'
+        )
+>       data['id'] = response.json()['id']
+E       KeyError: 'id'
+
+tests\utils.py:231: KeyError
+_________ Test05ReviewAPI.test_05_reviews_detail_moderator_and_admin __________
+
+self = <tests.test_05_review.Test05ReviewAPI object at 0x0000000006672760>
+admin_client = <rest_framework.test.APIClient object at 0x0000000006775700>
+admin = <User: TestAdmin>
+user_client = <rest_framework.test.APIClient object at 0x00000000061845E0>
+user = <User: TestUser>
+moderator_client = <rest_framework.test.APIClient object at 0x0000000005EBE430>
+moderator = <User: TestModerator>
+
+    def test_05_reviews_detail_moderator_and_admin(self, admin_client, admin,
+                                                   user_client, user,
+                                                   moderator_client,
+                                                   moderator):
+        author_map = {
+            admin: admin_client,
+            user: user_client,
+            moderator: moderator_client
+        }
+        url_template = '/api/v1/titles/{title_id}/reviews/{review_id}/'
+>       reviews, titles = create_reviews(admin_client, author_map)
+
+tests\test_05_review.py:349: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\utils.py:247: in create_reviews
+    titles, _, _ = create_titles(admin_client)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+admin_client = <rest_framework.test.APIClient object at 0x0000000006775700>
+
+    def create_titles(admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        result = []
+        data = {
+            'name': 'Терминатор',
+            'year': 1984,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'I`ll be back'
+        }
+        response = admin_client.post('/api/v1/titles/', data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            'Если POST-запрос администратора к `/api/v1/titles/` содержит '
+            'корректные данные - должен вернуться ответ со статусом 201.'
+        )
+>       data['id'] = response.json()['id']
+E       KeyError: 'id'
+
+tests\utils.py:231: KeyError
+__________________ Test06CommentAPI.test_01_comment_not_auth __________________
+
+self = <tests.test_06_comment.Test06CommentAPI object at 0x0000000005F9B490>
+client = <django.test.client.Client object at 0x00000000067755B0>
+admin_client = <rest_framework.test.APIClient object at 0x0000000006775AC0>
+admin = <User: TestAdmin>
+user_client = <rest_framework.test.APIClient object at 0x0000000005F247F0>
+user = <User: TestUser>
+moderator_client = <rest_framework.test.APIClient object at 0x0000000005F24640>
+moderator = <User: TestModerator>
+
+    def test_01_comment_not_auth(self, client, admin_client, admin,
+                                 user_client, user, moderator_client,
+                                 moderator):
+        author_map = {
+            admin: admin_client,
+            user: user_client,
+            moderator: moderator_client
+        }
+>       reviews, titles = create_reviews(admin_client, author_map)
+
+tests\test_06_comment.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\utils.py:247: in create_reviews
+    titles, _, _ = create_titles(admin_client)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+admin_client = <rest_framework.test.APIClient object at 0x0000000006775AC0>
+
+    def create_titles(admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        result = []
+        data = {
+            'name': 'Терминатор',
+            'year': 1984,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'I`ll be back'
+        }
+        response = admin_client.post('/api/v1/titles/', data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            'Если POST-запрос администратора к `/api/v1/titles/` содержит '
+            'корректные данные - должен вернуться ответ со статусом 201.'
+        )
+>       data['id'] = response.json()['id']
+E       KeyError: 'id'
+
+tests\utils.py:231: KeyError
+______________________ Test06CommentAPI.test_02_comment _______________________
+
+self = <tests.test_06_comment.Test06CommentAPI object at 0x0000000007E307F0>
+admin_client = <rest_framework.test.APIClient object at 0x0000000007E30070>
+admin = <User: TestAdmin>
+user_client = <rest_framework.test.APIClient object at 0x0000000006606C40>
+user = <User: TestUser>
+moderator_client = <rest_framework.test.APIClient object at 0x0000000006606F10>
+moderator = <User: TestModerator>
+
+    def test_02_comment(self, admin_client, admin, user_client, user,
+                        moderator_client, moderator):
+        author_map = {
+            admin: admin_client,
+            user: user_client,
+            moderator: moderator_client
+        }
+>       reviews, titles = create_reviews(admin_client, author_map)
+
+tests\test_06_comment.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\utils.py:247: in create_reviews
+    titles, _, _ = create_titles(admin_client)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+admin_client = <rest_framework.test.APIClient object at 0x0000000007E30070>
+
+    def create_titles(admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        result = []
+        data = {
+            'name': 'Терминатор',
+            'year': 1984,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'I`ll be back'
+        }
+        response = admin_client.post('/api/v1/titles/', data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            'Если POST-запрос администратора к `/api/v1/titles/` содержит '
+            'корректные данные - должен вернуться ответ со статусом 201.'
+        )
+>       data['id'] = response.json()['id']
+E       KeyError: 'id'
+
+tests\utils.py:231: KeyError
+_________________ Test06CommentAPI.test_03_comment_detail_get _________________
+
+self = <tests.test_06_comment.Test06CommentAPI object at 0x0000000007E30520>
+client = <django.test.client.Client object at 0x0000000006636460>
+admin_client = <rest_framework.test.APIClient object at 0x00000000066363D0>
+admin = <User: TestAdmin>
+user_client = <rest_framework.test.APIClient object at 0x0000000006B7C190>
+user = <User: TestUser>
+moderator_client = <rest_framework.test.APIClient object at 0x0000000006644A30>
+moderator = <User: TestModerator>
+
+    def test_03_comment_detail_get(self, client, admin_client, admin,
+                                   user_client, user, moderator_client,
+                                   moderator):
+        author_map = {
+            admin: admin_client,
+            user: user_client,
+            moderator: moderator_client
+        }
+>       comments, reviews, titles = create_comments(admin_client, author_map)
+
+tests\test_06_comment.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\utils.py:266: in create_comments
+    reviews, titles = create_reviews(admin_client, authors_map)
+tests\utils.py:247: in create_reviews
+    titles, _, _ = create_titles(admin_client)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+admin_client = <rest_framework.test.APIClient object at 0x00000000066363D0>
+
+    def create_titles(admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        result = []
+        data = {
+            'name': 'Терминатор',
+            'year': 1984,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'I`ll be back'
+        }
+        response = admin_client.post('/api/v1/titles/', data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            'Если POST-запрос администратора к `/api/v1/titles/` содержит '
+            'корректные данные - должен вернуться ответ со статусом 201.'
+        )
+>       data['id'] = response.json()['id']
+E       KeyError: 'id'
+
+tests\utils.py:231: KeyError
+_________ Test06CommentAPI.test_04_comment_detail__user_patch_delete __________
+
+self = <tests.test_06_comment.Test06CommentAPI object at 0x0000000006655A90>
+admin_client = <rest_framework.test.APIClient object at 0x0000000006636A90>
+admin = <User: TestAdmin>
+user_client = <rest_framework.test.APIClient object at 0x000000000667BF40>
+user = <User: TestUser>
+moderator_client = <rest_framework.test.APIClient object at 0x0000000006606BB0>
+moderator = <User: TestModerator>
+
+    def test_04_comment_detail__user_patch_delete(self, admin_client, admin,
+                                                  user_client, user,
+                                                  moderator_client,
+                                                  moderator):
+        author_map = {
+            admin: admin_client,
+            user: user_client,
+            moderator: moderator_client
+        }
+>       comments, reviews, titles = create_comments(admin_client, author_map)
+
+tests\test_06_comment.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\utils.py:266: in create_comments
+    reviews, titles = create_reviews(admin_client, authors_map)
+tests\utils.py:247: in create_reviews
+    titles, _, _ = create_titles(admin_client)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+admin_client = <rest_framework.test.APIClient object at 0x0000000006636A90>
+
+    def create_titles(admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        result = []
+        data = {
+            'name': 'Терминатор',
+            'year': 1984,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'I`ll be back'
+        }
+        response = admin_client.post('/api/v1/titles/', data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            'Если POST-запрос администратора к `/api/v1/titles/` содержит '
+            'корректные данные - должен вернуться ответ со статусом 201.'
+        )
+>       data['id'] = response.json()['id']
+E       KeyError: 'id'
+
+tests\utils.py:231: KeyError
+_________ Test06CommentAPI.test_05_comment_detail_admin_and_moderator _________
+
+self = <tests.test_06_comment.Test06CommentAPI object at 0x0000000006680EB0>
+admin_client = <rest_framework.test.APIClient object at 0x000000000672B700>
+admin = <User: TestAdmin>
+user_client = <rest_framework.test.APIClient object at 0x0000000007DD0520>
+user = <User: TestUser>
+moderator_client = <rest_framework.test.APIClient object at 0x0000000007DD0A30>
+moderator = <User: TestModerator>
+
+    def test_05_comment_detail_admin_and_moderator(self, admin_client, admin,
+                                                   user_client, user,
+                                                   moderator_client,
+                                                   moderator):
+        author_map = {
+            admin: admin_client,
+            user: user_client,
+            moderator: moderator_client
+        }
+>       comments, reviews, titles = create_comments(admin_client, author_map)
+
+tests\test_06_comment.py:260: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\utils.py:266: in create_comments
+    reviews, titles = create_reviews(admin_client, authors_map)
+tests\utils.py:247: in create_reviews
+    titles, _, _ = create_titles(admin_client)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+admin_client = <rest_framework.test.APIClient object at 0x000000000672B700>
+
+    def create_titles(admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        result = []
+        data = {
+            'name': 'Терминатор',
+            'year': 1984,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'I`ll be back'
+        }
+        response = admin_client.post('/api/v1/titles/', data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            'Если POST-запрос администратора к `/api/v1/titles/` содержит '
+            'корректные данные - должен вернуться ответ со статусом 201.'
+        )
+>       data['id'] = response.json()['id']
+E       KeyError: 'id'
+
+tests\utils.py:231: KeyError
+______________ Test06CommentAPI.test_06_comment_detail_not_auth _______________
+
+self = <tests.test_06_comment.Test06CommentAPI object at 0x000000000672B8E0>
+admin_client = <rest_framework.test.APIClient object at 0x0000000006B8B160>
+admin = <User: TestAdmin>
+client = <django.test.client.Client object at 0x0000000006B8B4C0>
+user_client = <rest_framework.test.APIClient object at 0x00000000066FA880>
+user = <User: TestUser>
+moderator_client = <rest_framework.test.APIClient object at 0x00000000066A8130>
+moderator = <User: TestModerator>
+
+    def test_06_comment_detail_not_auth(self, admin_client, admin, client,
+                                        user_client, user, moderator_client,
+                                        moderator):
+        author_map = {
+            admin: admin_client,
+            user: user_client,
+            moderator: moderator_client
+        }
+>       comments, reviews, titles = create_comments(admin_client, author_map)
+
+tests\test_06_comment.py:329: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\utils.py:266: in create_comments
+    reviews, titles = create_reviews(admin_client, authors_map)
+tests\utils.py:247: in create_reviews
+    titles, _, _ = create_titles(admin_client)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+admin_client = <rest_framework.test.APIClient object at 0x0000000006B8B160>
+
+    def create_titles(admin_client):
+        genres = create_genre(admin_client)
+        categories = create_categories(admin_client)
+        result = []
+        data = {
+            'name': 'Терминатор',
+            'year': 1984,
+            'genre': [genres[0]['slug'], genres[1]['slug']],
+            'category': categories[0]['slug'],
+            'description': 'I`ll be back'
+        }
+        response = admin_client.post('/api/v1/titles/', data=data)
+        assert response.status_code == HTTPStatus.CREATED, (
+            'Если POST-запрос администратора к `/api/v1/titles/` содержит '
+            'корректные данные - должен вернуться ответ со статусом 201.'
+        )
+>       data['id'] = response.json()['id']
+E       KeyError: 'id'
+
+tests\utils.py:231: KeyError
+-------------------------- Captured stderr teardown ---------------------------
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+============================== warnings summary ===============================
+tests/test_01_users.py::Test01UserAPI::test_04_users_get_admin
+tests/test_01_users.py::Test01UserAPI::test_04_02_users_get_search
+  c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\pagination.py:200: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'users.models.User'> QuerySet.
+    paginator = self.django_paginator_class(queryset, page_size)
+
+tests/test_02_category.py::Test02CategoryAPI::test_01_category_not_auth
+tests/test_02_category.py::Test02CategoryAPI::test_02_category_with_admin_user
+  c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\pagination.py:200: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'reviews.models.Category'> QuerySet.
+    paginator = self.django_paginator_class(queryset, page_size)
+
+tests/test_03_genre.py::Test03GenreAPI::test_01_genre_not_auth
+tests/test_03_genre.py::Test03GenreAPI::test_02_genre
+  c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\pagination.py:200: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'reviews.models.Genre'> QuerySet.
+    paginator = self.django_paginator_class(queryset, page_size)
+
+tests/test_04_title.py::Test04TitleAPI::test_01_title_not_auth
+  c:\dev\api_yamdb\venv\lib\site-packages\rest_framework\pagination.py:200: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'reviews.models.Title'> QuerySet.
+    paginator = self.django_paginator_class(queryset, page_size)
+
+-- Docs: https://docs.pytest.org/en/stable/warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_02_category.py::Test02CategoryAPI::test_02_category_with_admin_user
+FAILED tests/test_02_category.py::Test02CategoryAPI::test_04_category_delete_admin
+FAILED tests/test_02_category.py::Test02CategoryAPI::test_05_category_check_permission_admin
+FAILED tests/test_03_genre.py::Test03GenreAPI::test_02_genre - AssertionError...
+FAILED tests/test_03_genre.py::Test03GenreAPI::test_04_genres_delete - Assert...
+FAILED tests/test_03_genre.py::Test03GenreAPI::test_05_genres_check_permission
+FAILED tests/test_04_title.py::Test04TitleAPI::test_02_title_admin - Assertio...
+FAILED tests/test_04_title.py::Test04TitleAPI::test_03_titles_detail - KeyErr...
+FAILED tests/test_04_title.py::Test04TitleAPI::test_04_titles_name_length_validation
+FAILED tests/test_04_title.py::Test04TitleAPI::test_05_titles_check_permission
+FAILED tests/test_05_review.py::Test05ReviewAPI::test_01_review_not_auth - Ke...
+FAILED tests/test_05_review.py::Test05ReviewAPI::test_02_review_post - KeyErr...
+FAILED tests/test_05_review.py::Test05ReviewAPI::test_03_review_detail_get - ...
+FAILED tests/test_05_review.py::Test05ReviewAPI::test_04_review_detail_user
+FAILED tests/test_05_review.py::Test05ReviewAPI::test_05_reviews_detail_moderator_and_admin
+FAILED tests/test_06_comment.py::Test06CommentAPI::test_01_comment_not_auth
+FAILED tests/test_06_comment.py::Test06CommentAPI::test_02_comment - KeyError...
+FAILED tests/test_06_comment.py::Test06CommentAPI::test_03_comment_detail_get
+FAILED tests/test_06_comment.py::Test06CommentAPI::test_04_comment_detail__user_patch_delete
+FAILED tests/test_06_comment.py::Test06CommentAPI::test_05_comment_detail_admin_and_moderator
+FAILED tests/test_06_comment.py::Test06CommentAPI::test_06_comment_detail_not_auth
+============ 21 failed, 56 passed, 7 warnings in 79.63s (0:01:19) =============

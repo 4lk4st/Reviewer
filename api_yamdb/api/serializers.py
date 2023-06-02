@@ -27,6 +27,12 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ("username", "email")
         model = User
 
+    def validate_username(self, value):
+        if value == 'me':
+            raise serializers.ValidationError(
+                {'username': 'Нельзя использовать "me" для username'})
+        return value
+
 
 class UserTokenSerializer(TokenObtainPairSerializer):
     """
@@ -51,7 +57,6 @@ class UserTokenSerializer(TokenObtainPairSerializer):
         confirmation_code = attrs.get('confirmation_code')
         user = get_object_or_404(User, username=username)
 
-        # Проверка confirmation_code на соответствие условиям
         if user.confirmation_code == confirmation_code:
             attrs.update({'password': ''})
             token = RefreshToken.for_user(user)
@@ -148,7 +153,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     Methods
     -------
     validate():
-        check if user already create a review on current title 
+        check if user already create a review on current title
     """
     title = serializers.SlugRelatedField(
         slug_field='id', read_only=True)
@@ -229,7 +234,7 @@ class GenreSerializer(serializers.ModelSerializer):
 
 class TitleReadSerializer(serializers.ModelSerializer):
     """
-    Serializer for GET or RETRIEVE methods on Title model 
+    Serializer for GET or RETRIEVE methods on Title model
     ...
     Attributes
     ----------

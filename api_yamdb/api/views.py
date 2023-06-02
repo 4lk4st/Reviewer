@@ -53,13 +53,6 @@ class UserViewSet(viewsets.ModelViewSet):
                             status=status.HTTP_200_OK)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        if username == 'me':
-            return Response(
-                {'error': 'нельзя использовать - me - для username'},
-                status=status.HTTP_400_BAD_REQUEST)
-        role = serializer.validated_data.get('role')
-        if not role:
-            serializer.validated_data['role'] = 'user'
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         # Отправляем код подтверждения после создания пользователя

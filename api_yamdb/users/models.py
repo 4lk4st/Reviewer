@@ -13,10 +13,6 @@ def default_related_model():
 
 class UserManager(BaseUserManager):
     def create_user(self, username, email=None, password=None, **extra_fields):
-        if not username:
-            raise ValueError('The Username field must be set')
-        if username == 'me':
-            raise ValueError('нельзя использовать - me - для username')
         email = self.normalize_email(email)
         user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
@@ -26,8 +22,6 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, username, email=None, password=None,
                          **extra_fields):
-        if username == 'me':
-            raise ValueError('нельзя использовать - me - для username')
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         create_roles_and_permissions()
@@ -45,7 +39,8 @@ class User(AbstractUser):
                                       _('Enter a valid username. '
                                         'This value may contain '
                                         'only letters, numbers '
-                                        'and @/./+/-/_ characters.'), 'invalid'),
+                                        'and @/./+/-/_ characters.'),
+                                      'invalid'),
         ],)
     email = models.EmailField(unique=True, max_length=254)
     bio = models.TextField('Биография', blank=True)

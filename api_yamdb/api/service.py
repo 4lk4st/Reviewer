@@ -1,5 +1,5 @@
 
-import secrets
+import uuid
 
 from django.core.mail import send_mail
 
@@ -13,5 +13,5 @@ def send_confirmation_email(email, confirmation_code):
 
 
 def generate_confirmation_code(length=20):
-    confirmation_code = secrets.token_hex(10)
+    confirmation_code = uuid.uuid4()
     return confirmation_code

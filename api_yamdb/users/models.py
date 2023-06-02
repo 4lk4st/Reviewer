@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager, Group
 from django.db import models
+from django.core import validators
+from django.utils.translation import gettext_lazy as _
 
 from .permissions import create_roles_and_permissions
 
@@ -35,13 +37,24 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    username = models.CharField(
+        unique=True,
+        max_length=150,
+        validators=[
+            validators.RegexValidator(r'^[\w.@+-]+$',
+                                      _('Enter a valid username. '
+                                        'This value may contain '
+                                        'only letters, numbers '
+                                        'and @/./+/-/_ characters.'), 'invalid'),
+        ],)
+    email = models.EmailField(unique=True, max_length=254)
     bio = models.TextField('Биография', blank=True)
     ROLE_CHOICES = [
         ('user', 'User'),
         ('moderator', 'Moderator'),
         ('admin', 'Admin'),
     ]
-    role = models.CharField('Роль', max_length=10, choices=ROLE_CHOICES,
+    role = models.CharField('Роль', max_length=30, choices=ROLE_CHOICES,
                             default='user')
     confirmation_code = models.CharField(max_length=30, blank=True)
     objects = UserManager()

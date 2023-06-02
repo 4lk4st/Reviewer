@@ -31,46 +31,16 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (AllowAny,)
 
-    def name_email_validation(self, request):
-        email = request.data.get('email')
-        username = request.data.get('username')
-        errors = {}
-        if not email:
-            errors['email'] = ['Поле email обязательно для заполнения.']
-        if not username:
-            errors['username'] = ['Поле username обязательно для заполнения.']
-        if errors:
-            raise ValidationError(errors)
-        if len(email) > 254:
-            raise ValidationError(
-                {'email': 'Поле email не должно быть длинее 254 символов.'},
-                code=status.HTTP_400_BAD_REQUEST)
-        if len(username) > 150:
-            raise ValidationError(
-                {'username': 'Поле username не должно быть'
-                 'длинее 150 символов.'},
-                code=status.HTTP_400_BAD_REQUEST)
-
     def create(self, request, *args, **kwargs):
         username = request.data.get('username')
         email = request.data.get('email')
         create_roles_and_permissions()
-        self.name_email_validation(request=self.request)
-        if (
-            User.objects.filter(email=email).exists()
-            and User.objects.get(email=email).username != username
-        ):
-            raise ValidationError(
-                {'email': 'Пользователь с таким email уже'
-                 'зарегистрирован и не соответствует данному username.'},
-                code=status.HTTP_400_BAD_REQUEST)
         if (
             User.objects.filter(username=username).exists()
             and User.objects.get(username=username).email != email
         ):
             raise ValidationError(
-                {'username': 'Пользователь с таким username уже '
-                 'зарегистрирован и не соответствует данному email.'},
+                {'username': 'email не соответствует данному пользователю.'},
                 code=status.HTTP_400_BAD_REQUEST)
         existing_user = User.objects.filter(username=username).first()
         # Проверяем есть ли такой пользователь, если да то отдаем ему код

@@ -37,7 +37,7 @@ class UserViewSet(viewsets.ModelViewSet):
         email = request.data.get('email')
         create_roles_and_permissions()
         if (
-            User.objects.filter(username=username).exists()
+            User.objects.filter(username=username)
             and User.objects.get(username=username).email != email
         ):
             raise ValidationError(
@@ -105,21 +105,6 @@ class UsersViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter,)
     search_fields = ('username',)
     http_method_names = ['get', 'post', 'patch', 'delete']
-
-    def create(self, request, *args, **kwargs):
-        username = request.data.get('username')
-        email = request.data.get('email')
-        errors = {}
-        if not email:
-            errors['email'] = ['Поле email обязательно для заполнения.']
-        if not username:
-            errors['username'] = ['Поле username обязательно для заполнения.']
-        if User.objects.filter(email=email).exists():
-            errors['email'] = ['Пользователь с таким email уже зарегистрирован'
-                               'и не соответствует данному username.']
-        if errors:
-            raise ValidationError(errors)
-        return super().create(request, *args, **kwargs)
 
 
 class ReviewViewSet(viewsets.ModelViewSet):

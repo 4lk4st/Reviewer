@@ -21,6 +21,7 @@ from .serializers import (CategorySerializer, CommmentSerializer,
                           UserUpdateProfileSerializer)
 from .service import generate_confirmation_code, send_confirmation_email
 from .viewsets import ListCreateDestroyViewSet
+from .filter_fields import TitleFilter
 
 User = get_user_model()
 
@@ -170,23 +171,13 @@ class GenreViewSet(ListCreateDestroyViewSet):
 
 
 class TitleViewSet(viewsets.ModelViewSet):
+    queryset = Title.objects.all()
     permission_classes = (IsAdminOrReadOnly,)
     filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ('name', 'year')
+    filterset_class = TitleFilter
     http_method_names = ['get', 'post', 'head', 'patch', 'delete']
 
     def get_serializer_class(self):
         if self.action in ('list', 'retrieve'):
             return TitleReadSerializer
         return TitleWriteSerializer
-
-    def get_queryset(self):
-        # queryset = Title.objects.annotate(Avg('reviews__score'))
-        queryset = Title.objects.all()
-        genre = self.request.query_params.get('genre')
-        category = self.request.query_params.get('category')
-        if genre is not None:
-            queryset = queryset.filter(genre__slug=genre)
-        if category is not None:
-            queryset = queryset.filter(category__slug=category)
-        return queryset

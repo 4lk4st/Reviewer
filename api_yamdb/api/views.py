@@ -31,42 +31,16 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (AllowAny,)
-
+    
     def create(self, request, *args, **kwargs):
-        username = request.data.get('username')
-        email = request.data.get('email')
-        create_roles_and_permissions()
-        if (
-            User.objects.filter(username=username)
-            and User.objects.get(username=username).email != email
-        ):
-            raise ValidationError(
-                {'username': 'email не соответствует данному пользователю.'},
-                code=status.HTTP_400_BAD_REQUEST)
-        existing_user = User.objects.filter(username=username).first()
-        # Проверяем есть ли такой пользователь, если да то отдаем ему код
-        if existing_user:
-            confirmation_code = generate_confirmation_code()
-            existing_user.confirmation_code = confirmation_code
-            existing_user.save()
-            send_confirmation_email(email, confirmation_code)
-            return Response({'message': 'Confirmation code sent'},
-                            status=status.HTTP_200_OK)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
+        response_data = self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        # Отправляем код подтверждения после создания пользователя
-        user = serializer.instance
-        confirmation_code = generate_confirmation_code()
-        user.confirmation_code = confirmation_code
-        user.save()
-        send_confirmation_email(user.email, confirmation_code)
-        return Response(serializer.data, status=status.HTTP_200_OK,
-                        headers=headers)
+        return Response(response_data, status=status.HTTP_200_OK, headers=headers)
 
     def perform_create(self, serializer):
-        serializer.save()
+        return serializer.save()  
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):

@@ -6,6 +6,11 @@ from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.response import Response
+from rest_framework.serializers import ValidationError
+from rest_framework import status
+from users.permissions import create_roles_and_permissions
+from .service import generate_confirmation_code, send_confirmation_email
 
 from reviews.models import Category, Comment, Genre, Review, Title
 
@@ -23,15 +28,40 @@ class UserSerializer(serializers.ModelSerializer):
     email: str
         email of a user
     """
+    
     class Meta:
-        fields = ("username", "email")
         model = User
+        fields = ('username', 'email')
 
     def validate_username(self, value):
         if value == 'me':
             raise serializers.ValidationError(
                 {'username': 'Нельзя использовать "me" для username'})
         return value
+    
+    def create(self, validated_data):
+        username = validated_data.get('username')
+        email = validated_data.get('email')
+        create_roles_and_permissions()
+        
+        if User.objects.filter(username=username).exists():
+            user = User.objects.get(username=username)
+        elif User.objects.filter(email=email).exists():
+            user = User.objects.get(email=email)
+        else:
+            # Создаем нового пользователя
+            user = User.objects.create(**validated_data)
+        
+        # Отправляем код подтверждения
+        confirmation_code = generate_confirmation_code()
+        user.confirmation_code = confirmation_code
+        user.save()
+        send_confirmation_email(user.email, confirmation_code)
+        
+        # Сериализуем объект пользователя и возвращаем его в виде данных ответа
+        serializer = self.__class__(user)
+        return serializer.data
+
 
 
 class UserTokenSerializer(TokenObtainPairSerializer):
@@ -100,6 +130,8 @@ class UserUpdateProfileSerializer(serializers.ModelSerializer):
     bio: str
         biography of a user
     """
+    role = serializers.CharField(read_only=True)
+
     class Meta:
         fields = ("username", "email", "first_name", "last_name", "bio",
                   "role")

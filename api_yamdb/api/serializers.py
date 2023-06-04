@@ -100,6 +100,8 @@ class UserUpdateProfileSerializer(serializers.ModelSerializer):
     bio: str
         biography of a user
     """
+    role = serializers.CharField(read_only=True)
+
     class Meta:
         fields = ("username", "email", "first_name", "last_name", "bio",
                   "role")

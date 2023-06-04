@@ -85,14 +85,6 @@ class UserUpdateProfileAPIView(generics.RetrieveUpdateAPIView):
         return User.objects.filter(id=self.request.user.id)
 
     def update(self, request, *args, **kwargs):
-        if 'role' in request.data:
-            current_role = self.request.user.role
-            new_role = request.data.get('role')
-            if current_role != new_role:
-                return Response(
-                    {'detail': 'Вы не можете изменить свою роль'},
-                    status=status.HTTP_403_FORBIDDEN
-                )
         return super().update(request, *args, **kwargs)
 
 

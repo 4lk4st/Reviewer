@@ -5,13 +5,11 @@ from rest_framework import filters, generics, status, viewsets
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.serializers import ValidationError
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import filters
 
 from reviews.models import Category, Genre, Review, Title
 from users.models import User
-from users.permissions import create_roles_and_permissions
 
 from .permissions import IsAdmin, IsAdminOrReadOnly, ReviewCommentPermissions
 from .serializers import (CategorySerializer, CommmentSerializer,
@@ -19,7 +17,6 @@ from .serializers import (CategorySerializer, CommmentSerializer,
                           TitleReadSerializer, TitleWriteSerializer,
                           UserSerializer, UsersSerializer, UserTokenSerializer,
                           UserUpdateProfileSerializer)
-from .service import generate_confirmation_code, send_confirmation_email
 from .viewsets import ListCreateDestroyViewSet
 from .filter_fields import TitleFilter
 
@@ -31,16 +28,17 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (AllowAny,)
-    
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         response_data = self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        return Response(response_data, status=status.HTTP_200_OK, headers=headers)
+        return Response(
+            response_data, status=status.HTTP_200_OK, headers=headers)
 
     def perform_create(self, serializer):
-        return serializer.save()  
+        return serializer.save()
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):

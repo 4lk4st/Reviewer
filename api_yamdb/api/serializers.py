@@ -11,13 +11,15 @@ from rest_framework.serializers import ValidationError
 from rest_framework import status
 from users.permissions import create_roles_and_permissions
 from .service import generate_confirmation_code, send_confirmation_email
+from django.core import validators
+from django.utils.translation import gettext_lazy as _
 
 from reviews.models import Category, Comment, Genre, Review, Title
 
 User = get_user_model()
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.Serializer):
     """
     Serializer for a User model
     ...
@@ -28,7 +30,46 @@ class UserSerializer(serializers.ModelSerializer):
     email: str
         email of a user
     """
-    
+    username = serializers.CharField(
+        max_length=150,
+        validators=[
+            validators.RegexValidator(r'^[\w.@+-]+$',
+                                      _('Enter a valid username. '
+                                        'This value may contain '
+                                        'only letters, numbers '
+                                        'and @/./+/-/_ characters.'),
+                                      'invalid'),
+        ],)
+    email = serializers.EmailField(max_length=150)
+
+    def create(self, validated_data):
+        username = validated_data.get('username')
+        email = validated_data.get('email')
+        create_roles_and_permissions()
+        if (
+            User.objects.filter(email=email).exists()
+            and User.objects.get(email=email).username != username
+        ):
+            raise ValidationError(
+                {'email': 'username не соответствует данному пользователю.'},
+                code=status.HTTP_400_BAD_REQUEST)
+        elif (User.objects.filter(username=username).exists()
+              and User.objects.get(username=username).email != email):
+            raise ValidationError(
+                {'username': 'email не соответствует данному пользователю.'},
+                code=status.HTTP_400_BAD_REQUEST)
+        else:
+            # Создаем нового пользователя
+            user = User.objects.create(**validated_data)
+        # Отправляем код подтверждения
+        confirmation_code = generate_confirmation_code()
+        user.confirmation_code = confirmation_code
+        user.save()
+        send_confirmation_email(user.email, confirmation_code)
+        # Сериализуем объект пользователя и возвращаем его в виде данных ответа
+        serializer = self.__class__(user)
+        return serializer.data
+
     class Meta:
         model = User
         fields = ('username', 'email')
@@ -38,29 +79,6 @@ class UserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 {'username': 'Нельзя использовать "me" для username'})
         return value
-    
-    def create(self, validated_data):
-        username = validated_data.get('username')
-        email = validated_data.get('email')
-        create_roles_and_permissions()
-        
-        if User.objects.filter(username=username).exists():
-            user = User.objects.get(username=username)
-        elif User.objects.filter(email=email).exists():
-            user = User.objects.get(email=email)
-        else:
-            # Создаем нового пользователя
-            user = User.objects.create(**validated_data)
-        
-        # Отправляем код подтверждения
-        confirmation_code = generate_confirmation_code()
-        user.confirmation_code = confirmation_code
-        user.save()
-        send_confirmation_email(user.email, confirmation_code)
-        
-        # Сериализуем объект пользователя и возвращаем его в виде данных ответа
-        serializer = self.__class__(user)
-        return serializer.data
 
 
 

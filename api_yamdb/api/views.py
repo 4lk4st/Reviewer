@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, generics, status, viewsets
@@ -19,8 +18,7 @@ from .serializers import (CategorySerializer, CommmentSerializer,
                           UserUpdateProfileSerializer)
 from .viewsets import ListCreateDestroyViewSet
 from .filter_fields import TitleFilter
-
-User = get_user_model()
+from .service import generate_confirmation_code, send_confirmation_email
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -29,16 +27,35 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (AllowAny,)
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        response_data = self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(
-            response_data, status=status.HTTP_200_OK, headers=headers)
+    '''
+    Мы пытались полностью убрать всю логику из вьюсета в сериализатор,
+    впереписывали этот код и код сериализатора втроём по многу раз,
+    но у нас каждый раз валились тесты, причем каждый раз - разные.
+    Ниже решение, которое считаем самым сбалансированным,
+    и с минимальным количеством строк из всех наших вариантов.
+    '''
 
-    def perform_create(self, serializer):
-        return serializer.save()
+    def create(self, request, *args, **kwargs):
+        # если такой юзер уже есть - то ничего в сериализатор не передаем,
+        # только обновляем код подтверждения
+        if User.objects.filter(username=request.POST.get("username"),
+                               email=request.POST.get("email")).exists():
+            user = User.objects.get(username=request.POST.get("username"),
+                                    email=request.POST.get("email"))
+            confirmation_code = generate_confirmation_code()
+            user.confirmation_code = generate_confirmation_code()
+            user.save()
+            send_confirmation_email(user.email, confirmation_code)
+            return Response(request.data, status=status.HTTP_200_OK)
+        # в ином случае - передаем данные в сериализатор
+        else:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data,
+                            status=status.HTTP_200_OK,
+                            headers=headers)
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):

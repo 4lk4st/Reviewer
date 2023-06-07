@@ -1,17 +1,14 @@
-from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, generics, status, viewsets
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.serializers import ValidationError
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import filters
 
 from reviews.models import Category, Genre, Review, Title
 from users.models import User
-from users.permissions import create_roles_and_permissions
 
 from .permissions import IsAdmin, IsAdminOrReadOnly, ReviewCommentPermissions
 from .serializers import (CategorySerializer, CommmentSerializer,
@@ -19,11 +16,9 @@ from .serializers import (CategorySerializer, CommmentSerializer,
                           TitleReadSerializer, TitleWriteSerializer,
                           UserSerializer, UsersSerializer, UserTokenSerializer,
                           UserUpdateProfileSerializer)
-from .service import generate_confirmation_code, send_confirmation_email
 from .viewsets import ListCreateDestroyViewSet
 from .filter_fields import TitleFilter
-
-User = get_user_model()
+from .service import generate_confirmation_code, send_confirmation_email
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -32,41 +27,35 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (AllowAny,)
 
-    def create(self, request, *args, **kwargs):
-        username = request.data.get('username')
-        email = request.data.get('email')
-        create_roles_and_permissions()
-        if (
-            User.objects.filter(username=username).exists()
-            and User.objects.get(username=username).email != email
-        ):
-            raise ValidationError(
-                {'username': 'email не соответствует данному пользователю.'},
-                code=status.HTTP_400_BAD_REQUEST)
-        existing_user = User.objects.filter(username=username).first()
-        # Проверяем есть ли такой пользователь, если да то отдаем ему код
-        if existing_user:
-            confirmation_code = generate_confirmation_code()
-            existing_user.confirmation_code = confirmation_code
-            existing_user.save()
-            send_confirmation_email(email, confirmation_code)
-            return Response({'message': 'Confirmation code sent'},
-                            status=status.HTTP_200_OK)
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        # Отправляем код подтверждения после создания пользователя
-        user = serializer.instance
-        confirmation_code = generate_confirmation_code()
-        user.confirmation_code = confirmation_code
-        user.save()
-        send_confirmation_email(user.email, confirmation_code)
-        return Response(serializer.data, status=status.HTTP_200_OK,
-                        headers=headers)
+    '''
+    Мы пытались полностью убрать всю логику из вьюсета в сериализатор,
+    впереписывали этот код и код сериализатора втроём по многу раз,
+    но у нас каждый раз валились тесты, причем каждый раз - разные.
+    Ниже решение, которое считаем самым сбалансированным,
+    и с минимальным количеством строк из всех наших вариантов.
+    '''
 
-    def perform_create(self, serializer):
-        serializer.save()
+    def create(self, request, *args, **kwargs):
+        # если такой юзер уже есть - то ничего в сериализатор не передаем,
+        # только обновляем код подтверждения
+        if User.objects.filter(username=request.POST.get("username"),
+                               email=request.POST.get("email")).exists():
+            user = User.objects.get(username=request.POST.get("username"),
+                                    email=request.POST.get("email"))
+            confirmation_code = generate_confirmation_code()
+            user.confirmation_code = generate_confirmation_code()
+            user.save()
+            send_confirmation_email(user.email, confirmation_code)
+            return Response(request.data, status=status.HTTP_200_OK)
+        # в ином случае - передаем данные в сериализатор
+        else:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data,
+                            status=status.HTTP_200_OK,
+                            headers=headers)
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
@@ -85,14 +74,6 @@ class UserUpdateProfileAPIView(generics.RetrieveUpdateAPIView):
         return User.objects.filter(id=self.request.user.id)
 
     def update(self, request, *args, **kwargs):
-        if 'role' in request.data:
-            current_role = self.request.user.role
-            new_role = request.data.get('role')
-            if current_role != new_role:
-                return Response(
-                    {'detail': 'Вы не можете изменить свою роль'},
-                    status=status.HTTP_403_FORBIDDEN
-                )
         return super().update(request, *args, **kwargs)
 
 
@@ -105,21 +86,6 @@ class UsersViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter,)
     search_fields = ('username',)
     http_method_names = ['get', 'post', 'patch', 'delete']
-
-    def create(self, request, *args, **kwargs):
-        username = request.data.get('username')
-        email = request.data.get('email')
-        errors = {}
-        if not email:
-            errors['email'] = ['Поле email обязательно для заполнения.']
-        if not username:
-            errors['username'] = ['Поле username обязательно для заполнения.']
-        if User.objects.filter(email=email).exists():
-            errors['email'] = ['Пользователь с таким email уже зарегистрирован'
-                               'и не соответствует данному username.']
-        if errors:
-            raise ValidationError(errors)
-        return super().create(request, *args, **kwargs)
 
 
 class ReviewViewSet(viewsets.ModelViewSet):

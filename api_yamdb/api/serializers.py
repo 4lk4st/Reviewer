@@ -1,15 +1,13 @@
-# from email.policy import default
-
-from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from users.permissions import create_roles_and_permissions
+from .service import generate_confirmation_code, send_confirmation_email
 from reviews.models import Category, Comment, Genre, Review, Title
-
-User = get_user_model()
+from users.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -24,14 +22,27 @@ class UserSerializer(serializers.ModelSerializer):
         email of a user
     """
     class Meta:
-        fields = ("username", "email")
         model = User
+        fields = ('username', 'email')
 
     def validate_username(self, value):
         if value == 'me':
             raise serializers.ValidationError(
                 {'username': 'Нельзя использовать "me" для username'})
         return value
+
+    def create(self, validated_data):
+        create_roles_and_permissions()
+        user = User.objects.create(
+            email=validated_data['email'],
+            username=validated_data['username'],
+            confirmation_code=generate_confirmation_code()
+        )
+        user.save()
+        send_confirmation_email(
+            user.email,
+            user.confirmation_code)
+        return user
 
 
 class UserTokenSerializer(TokenObtainPairSerializer):
@@ -100,6 +111,8 @@ class UserUpdateProfileSerializer(serializers.ModelSerializer):
     bio: str
         biography of a user
     """
+    role = serializers.CharField(read_only=True)
+
     class Meta:
         fields = ("username", "email", "first_name", "last_name", "bio",
                   "role")

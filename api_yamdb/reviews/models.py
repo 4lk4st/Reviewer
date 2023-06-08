@@ -30,7 +30,10 @@ class Category(models.Model):
     str():
         print a slug of a category.
     """
-    name = models.CharField(max_length=NAME_LEN)
+    name = models.CharField(
+        max_length=NAME_LEN,
+        verbose_name='Название категории',
+    )
     slug = models.SlugField(max_length=SLUG_LEN, unique=True)
 
     def __str__(self):
@@ -38,6 +41,8 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['-slug']
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
 
 
 class Genre(models.Model):
@@ -57,7 +62,9 @@ class Genre(models.Model):
     str():
         print a slug of a genre.
     """
-    name = models.CharField(max_length=NAME_LEN)
+    name = models.CharField(
+        max_length=NAME_LEN,
+        verbose_name='Жанр произведения')
     slug = models.SlugField(max_length=SLUG_LEN, unique=True)
 
     def __str__(self):
@@ -65,6 +72,8 @@ class Genre(models.Model):
 
     class Meta:
         ordering = ['-slug']
+        verbose_name = 'Жанр'
+        verbose_name_plural = 'Жанры'
 
 
 class Title(models.Model):
@@ -92,16 +101,27 @@ class Title(models.Model):
     str():
         print a name of a title.
     """
-    name = models.CharField(max_length=NAME_LEN)
-    year = models.IntegerField()
-    rating = models.IntegerField(null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
-    genre = models.ManyToManyField(Genre)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL,
-                                 null=True, blank=True, related_name='titles')
+    name = models.CharField(
+        max_length=NAME_LEN,
+        verbose_name='Название произведения')
+    year = models.IntegerField(verbose_name='Год издания')
+    rating = models.IntegerField(
+        null=True, blank=True,
+        verbose_name='Рейтинг произведения')
+    description = models.TextField(
+        null=True, blank=True,
+        verbose_name='Описание произведения',)
+    genre = models.ManyToManyField(
+        Genre, verbose_name='Жанр')
+    category = models.ForeignKey(
+        Category, on_delete=models.SET_NULL,
+        null=True, blank=True, related_name='titles',
+        verbose_name='Категория')
 
     class Meta:
         ordering = ['-rating']
+        verbose_name = 'Произведение'
+        verbose_name_plural = 'Произведения'
 
     def __str__(self):
         return f'{self.name}'[:10]

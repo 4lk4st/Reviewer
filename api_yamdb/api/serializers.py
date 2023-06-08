@@ -73,8 +73,6 @@ class UserTokenSerializer(TokenObtainPairSerializer):
             token = RefreshToken.for_user(user)
             return {'token': str(token.access_token)}
         else:
-            print(f'пользователя: {user.confirmation_code}')
-            print(f'в запросе: {confirmation_code}')
             raise serializers.ValidationError('Invalid confirmation code')
 
 

@@ -5,6 +5,8 @@ from django.db import models
 
 from dotenv import load_dotenv
 
+from .validator import year_validator
+
 load_dotenv()
 
 User = get_user_model()
@@ -104,7 +106,9 @@ class Title(models.Model):
     name = models.CharField(
         max_length=NAME_LEN,
         verbose_name='Название произведения')
-    year = models.IntegerField(verbose_name='Год издания')
+    year = models.IntegerField(
+        verbose_name='Год издания',
+        validators=[year_validator])
     rating = models.IntegerField(
         null=True, blank=True,
         verbose_name='Рейтинг произведения')

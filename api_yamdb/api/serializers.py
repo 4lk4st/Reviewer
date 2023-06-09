@@ -31,7 +31,7 @@ class UserSerializer(serializers.ModelSerializer):
             _('Enter a valid username. '
               'This value may contain '
               'only letters, numbers '
-              'and @/./+/-/_ characters.'), 'invalid'),])
+              'and @/./+/-/_ characters.'), 'invalid'), ])
     email = serializers.EmailField(max_length=254)
 
     class Meta:

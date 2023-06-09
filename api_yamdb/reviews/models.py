@@ -108,7 +108,8 @@ class Title(models.Model):
         verbose_name='Название произведения')
     year = models.IntegerField(
         verbose_name='Год издания',
-        validators=[year_validator])
+        validators=[year_validator],
+        db_index=True)
     rating = models.IntegerField(
         null=True, blank=True,
         verbose_name='Рейтинг произведения')

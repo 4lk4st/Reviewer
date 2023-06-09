@@ -1,5 +1,8 @@
 from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404
+from django.core import validators
+from django.utils.translation import gettext_lazy as _
+from rest_framework import status
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -21,9 +24,39 @@ class UserSerializer(serializers.ModelSerializer):
     email: str
         email of a user
     """
+    username = serializers.CharField(
+        max_length=150,
+        validators=[validators.RegexValidator(
+            r'^[\w.@+-]+$',
+            _('Enter a valid username. '
+              'This value may contain '
+              'only letters, numbers '
+              'and @/./+/-/_ characters.'), 'invalid'),])
+    email = serializers.EmailField(max_length=254)
+
     class Meta:
         model = User
         fields = ('username', 'email')
+
+    def validate(self, data):
+        # если email существует, а username - нет,
+        # то возвращаем ошибку
+        if User.objects.filter(
+            email=data['email']).exists() and not User.objects.filter(
+                username=data['username']).exists():
+            raise serializers.ValidationError(
+                {'email': 'username не соответствует данному email.'},
+                code=status.HTTP_400_BAD_REQUEST)
+        # если username существует, а email - нет,
+        # то возвращаем ошибку
+        elif not User.objects.filter(
+            email=data['email']).exists() and User.objects.filter(
+                username=data['username']).exists():
+            raise serializers.ValidationError(
+                {'username': 'email не соответствует данному username.'},
+                code=status.HTTP_400_BAD_REQUEST)
+        else:
+            return data
 
     def validate_username(self, value):
         if value == 'me':
@@ -33,16 +66,33 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         create_roles_and_permissions()
-        user = User.objects.create(
-            email=validated_data['email'],
+        # если такой пользователь существует -
+        # только обновляем код подтверждения
+        if User.objects.filter(
             username=validated_data['username'],
-            confirmation_code=generate_confirmation_code()
-        )
-        user.save()
-        send_confirmation_email(
-            user.email,
-            user.confirmation_code)
-        return user
+            email=validated_data["email"]
+        ).exists():
+            user = User.objects.get(
+                username=validated_data['username'],
+                email=validated_data["email"]
+            )
+            confirmation_code = generate_confirmation_code()
+            user.confirmation_code = generate_confirmation_code()
+            user.save()
+            send_confirmation_email(user.email, confirmation_code)
+            return user
+        # если пользователя нет - создаем его
+        else:
+            user = User.objects.create(
+                email=validated_data['email'],
+                username=validated_data['username'],
+                confirmation_code=generate_confirmation_code()
+            )
+            user.save()
+            send_confirmation_email(
+                user.email,
+                user.confirmation_code)
+            return user
 
 
 class UserTokenSerializer(TokenObtainPairSerializer):
@@ -73,8 +123,6 @@ class UserTokenSerializer(TokenObtainPairSerializer):
             token = RefreshToken.for_user(user)
             return {'token': str(token.access_token)}
         else:
-            print(f'пользователя: {user.confirmation_code}')
-            print(f'в запросе: {confirmation_code}')
             raise serializers.ValidationError('Invalid confirmation code')
 
 

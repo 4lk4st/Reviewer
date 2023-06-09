@@ -31,9 +31,18 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    USER_ROLE_USER = 'user'
+    USER_ROLE_MODERATOR = 'moderator'
+    USER_ROLE_ADMIN = 'admin'
+    ROLE_CHOICES = [
+        ('user', 'User'),
+        ('moderator', 'Moderator'),
+        ('admin', 'Admin'),
+    ]
     username = models.CharField(
         unique=True,
         max_length=150,
+        verbose_name='Имя пользователя',
         validators=[
             validators.RegexValidator(r'^[\w.@+-]+$',
                                       _('Enter a valid username. '
@@ -42,17 +51,31 @@ class User(AbstractUser):
                                         'and @/./+/-/_ characters.'),
                                       'invalid'),
         ],)
-    email = models.EmailField(unique=True, max_length=254)
-    bio = models.TextField('Биография', blank=True)
-    ROLE_CHOICES = [
-        ('user', 'User'),
-        ('moderator', 'Moderator'),
-        ('admin', 'Admin'),
-    ]
-    role = models.CharField('Роль', max_length=30, choices=ROLE_CHOICES,
-                            default='user')
+    email = models.EmailField(
+        unique=True, max_length=254,
+        verbose_name='Почта')
+    bio = models.TextField(verbose_name='Биография', blank=True)
+    role = models.CharField(
+        verbose_name='Роль', max_length=30, choices=ROLE_CHOICES,
+        default=USER_ROLE_USER)
     confirmation_code = models.CharField(max_length=30, blank=True)
     objects = UserManager()
 
     class Meta:
         ordering = ['-username']
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+
+    @property
+    def is_moderator(self):
+        if self.role == self.USER_ROLE_MODERATOR:
+            return True
+        else:
+            return False
+
+    @property
+    def is_admin(self):
+        if self.role == self.USER_ROLE_ADMIN:
+            return True
+        else:
+            return False

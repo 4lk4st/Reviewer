@@ -31,6 +31,14 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    USER_ROLE_USER = 'user'
+    USER_ROLE_MODERATOR = 'moderator'
+    USER_ROLE_ADMIN = 'admin'
+    ROLE_CHOICES = [
+        ('user', 'User'),
+        ('moderator', 'Moderator'),
+        ('admin', 'Admin'),
+    ]
     username = models.CharField(
         unique=True,
         max_length=150,
@@ -47,14 +55,9 @@ class User(AbstractUser):
         unique=True, max_length=254,
         verbose_name='Почта')
     bio = models.TextField(verbose_name='Биография', blank=True)
-    ROLE_CHOICES = [
-        ('user', 'User'),
-        ('moderator', 'Moderator'),
-        ('admin', 'Admin'),
-    ]
     role = models.CharField(
         verbose_name='Роль', max_length=30, choices=ROLE_CHOICES,
-        default='user')
+        default=USER_ROLE_USER)
     confirmation_code = models.CharField(max_length=30, blank=True)
     objects = UserManager()
 

@@ -65,3 +65,17 @@ class User(AbstractUser):
         ordering = ['-username']
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
+
+    @property
+    def is_moderator(self):
+        if self.role == self.USER_ROLE_MODERATOR:
+            return True
+        else:
+            return False
+
+    @property
+    def is_admin(self):
+        if self.role == self.USER_ROLE_ADMIN:
+            return True
+        else:
+            return False

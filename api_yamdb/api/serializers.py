@@ -23,6 +23,16 @@ class UserSerializer(serializers.ModelSerializer):
         name of a user
     email: str
         email of a user
+    Methods
+    -------
+    validate:
+        check combinations of email and username values
+    validate_username:
+        check username field
+    create:
+        create user and/or update confirmation code
+    confirmation_code_update:
+        update user confirmation code field and send to email
     """
     username = serializers.CharField(
         max_length=150,
@@ -66,33 +76,29 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         create_roles_and_permissions()
-        # если такой пользователь существует -
-        # только обновляем код подтверждения
-        if User.objects.filter(
+        # если такой пользователь существует - обновляем код подтверждения
+        user = User.objects.filter(
             username=validated_data['username'],
             email=validated_data["email"]
-        ).exists():
-            user = User.objects.get(
-                username=validated_data['username'],
-                email=validated_data["email"]
-            )
-            confirmation_code = generate_confirmation_code()
-            user.confirmation_code = generate_confirmation_code()
-            user.save()
-            send_confirmation_email(user.email, confirmation_code)
-            return user
+        )
+        if user.exists():
+            self.confirmation_code_update(user=user.first())
+            return user.first()
         # если пользователя нет - создаем его
         else:
             user = User.objects.create(
                 email=validated_data['email'],
                 username=validated_data['username'],
-                confirmation_code=generate_confirmation_code()
             )
-            user.save()
-            send_confirmation_email(
-                user.email,
-                user.confirmation_code)
+            self.confirmation_code_update(user=user)
             return user
+
+    def confirmation_code_update(self, user: User) -> None:
+        # функция для обновления кода подтверждения
+        confirmation_code = generate_confirmation_code()
+        user.confirmation_code = generate_confirmation_code()
+        user.save()
+        send_confirmation_email(user.email, confirmation_code)
 
 
 class UserTokenSerializer(TokenObtainPairSerializer):
